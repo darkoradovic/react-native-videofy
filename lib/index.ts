@@ -5,4 +5,6 @@ export interface VideoProps {
   prompt: string;
   video: string;
   creator?: any;
+  users?: any;
+  avatar?: string;
 }

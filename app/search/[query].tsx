@@ -26,8 +26,8 @@ const Search = () => {
             title={item.title}
             thumbnail={item.thumbnail}
             video={item.video}
-            creator={item.creator.username ? item.creator.username : ""}
-            avatar={item.creator.avatar ? item.creator.avatar : ""}
+            creator={item.users.username ? item.users.username : ""}
+            avatar={item.users.avatar ? item.users.avatar : ""}
           />
         )}
         ListHeaderComponent={() => (

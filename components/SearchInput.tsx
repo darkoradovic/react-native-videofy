@@ -6,7 +6,7 @@ import { icons } from "../constants";
 
 interface SearchInputProps {
   initialQuery?: any;
-  refetch: () => void;
+  refetch?: () => void;
 }
 
 const SearchInput = ({ initialQuery, refetch }: SearchInputProps) => {

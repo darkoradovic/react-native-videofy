@@ -16,17 +16,20 @@ import Trending from "@/components/Trending";
 import EmptyState from "@/components/EmptyState";
 import useGetData from "@/hooks/getData";
 import VideoCard from "@/components/VideoCard";
+import { useGlobalContext } from "@/context/globalProvider";
 
 const home = () => {
   const [refreshing, setRefreshing] = useState(false);
   const { data: posts, refetch } = useGetData(getAllPosts);
   const { data: latestPosts } = useGetData(getLatestPosts);
+  const { user } = useGlobalContext();
 
   const onRefresh = async () => {
     setRefreshing(true);
     await refetch();
     setRefreshing(false);
   };
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
@@ -37,6 +40,8 @@ const home = () => {
             title={item.title}
             thumbnail={item.thumbnail}
             video={item.video}
+            creator={item.users.username}
+            avatar={item.users.avatar}
           />
         )}
         ListHeaderComponent={() => (
@@ -44,10 +49,10 @@ const home = () => {
             <View className="flex justify-between items-start flex-row mb-6">
               <View>
                 <Text className="font-pmedium text-sm text-gray-100">
-                  Welcome Back
+                  Welcome back,
                 </Text>
                 <Text className="text-2xl font-psemibold text-white">
-                  JSMastery
+                  {user?.username}
                 </Text>
               </View>
 

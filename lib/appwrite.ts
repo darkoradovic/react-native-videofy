@@ -189,7 +189,7 @@ export async function createVideoPost(form: any) {
         thumbnail: thumbnailUrl,
         video: videoUrl,
         prompt: form.prompt,
-        creator: form.userId,
+        users: form.userId,
       }
     );
 
@@ -204,7 +204,8 @@ export async function getAllPosts() {
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
-      appwriteConfig.videoCollectionId
+      appwriteConfig.videoCollectionId,
+      [Query.orderDesc("$createdAt")]
     );
 
     return posts.documents;
@@ -219,7 +220,7 @@ export async function getUserPosts(userId: any) {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.videoCollectionId,
-      [Query.equal("creator", userId)]
+      [Query.equal("users", userId)]
     );
 
     return posts.documents;
@@ -251,7 +252,7 @@ export async function getLatestPosts() {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.videoCollectionId,
-      [Query.orderDesc("$createdAt"), Query.limit(7)]
+      [Query.orderDesc("$createdAt"), Query.limit(5)]
     );
 
     return posts.documents;
