@@ -23,6 +23,7 @@ const CustomButton = ({
         isLoading ? "opacity-50" : ""
       }`}
       disabled={isLoading}
+      onPress={handlePress}
     >
       <Text className={`text-primary font-psemibold text-lg ${textStyles}`}>
         {title}
